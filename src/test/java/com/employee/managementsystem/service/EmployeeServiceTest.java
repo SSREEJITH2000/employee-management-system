@@ -10,7 +10,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -52,5 +56,17 @@ public class EmployeeServiceTest {
         EmployeeResponse result = employeeService.getEmployeeById(id);
         assertEquals(result,response);
         verify(employeeRepository,times(1)).findById(id);
+    }
+    @Test
+    void searchEmployeeByDepartmentTest(){
+        String department = "First department";
+        List<Employee> allEmployees = new ArrayList<>();
+        when(employeeRepository.findAll()).thenReturn(allEmployees);
+        List<EmployeeResponse> retrievedEmployees = employeeService.searchEmployeeByDepartment(department);
+        List<Employee> result = allEmployees.stream()
+                .filter(dept -> dept.getDepartment().toLowerCase().contains(department.toLowerCase()))
+                .collect(Collectors.toList());
+        assertEquals(result, retrievedEmployees);
+        Mockito.verify(employeeRepository).findAll();
     }
 }

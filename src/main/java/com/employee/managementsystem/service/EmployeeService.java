@@ -28,10 +28,10 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
         return modelMapper.map(employee, EmployeeResponse.class);
     }
-    public List<EmployeeResponse> searchEmployeeByDept(String dept) {
+    public List<EmployeeResponse> searchEmployeeByDepartment(String department) {
         List<Employee> employees = this.employeeRepository.findAll();
         List<Employee> retrievedEmployees = employees.stream()
-                .filter(employee -> employee.getDepartment().toLowerCase().contains(dept.toLowerCase()))
+                .filter(employee -> employee.getDepartment().toLowerCase().contains(department.toLowerCase()))
                 .collect(Collectors.toList());
         List<EmployeeResponse> employeeResponses = new ArrayList<>();
 

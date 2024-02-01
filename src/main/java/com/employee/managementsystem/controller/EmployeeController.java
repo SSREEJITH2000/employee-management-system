@@ -31,7 +31,7 @@ public class EmployeeController {
         return this.employeeService.getEmployeeById(id);
     }
     @GetMapping("/search")
-    public @ResponseBody List<EmployeeResponse> searchEmployeeByDept(@RequestParam String dept){
-        return this.employeeService.searchEmployeeByDept(dept);
+    public @ResponseBody List<EmployeeResponse> searchEmployeeByDepartment(@RequestParam String department){
+        return this.employeeService.searchEmployeeByDepartment(department);
     }
 }

@@ -1,10 +1,13 @@
 package com.employee.managementsystem.contract.response;
 
+import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeResponse {
@@ -12,4 +15,5 @@ public class EmployeeResponse {
     private String name;
     private String email;
     private String department;
+
 }
