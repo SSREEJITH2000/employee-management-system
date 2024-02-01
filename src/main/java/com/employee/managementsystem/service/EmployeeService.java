@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,11 +28,16 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
         return modelMapper.map(employee, EmployeeResponse.class);
     }
-    public List<Employee> searchEmployeeByDept(String dept) {
+    public List<EmployeeResponse> searchEmployeeByDept(String dept) {
         List<Employee> employees = this.employeeRepository.findAll();
         List<Employee> retrievedEmployees = employees.stream()
                 .filter(employee -> employee.getDepartment().toLowerCase().contains(dept.toLowerCase()))
                 .collect(Collectors.toList());
-        return retrievedEmployees;
+        List<EmployeeResponse> employeeResponses = new ArrayList<>();
+
+        for (Employee employee : retrievedEmployees) {
+            employeeResponses.add(modelMapper.map(employee, EmployeeResponse.class));
+        }
+        return employeeResponses;
     }
 }

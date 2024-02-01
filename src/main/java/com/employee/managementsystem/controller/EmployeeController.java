@@ -2,7 +2,6 @@ package com.employee.managementsystem.controller;
 
 import com.employee.managementsystem.contract.request.EmployeeRequest;
 import com.employee.managementsystem.contract.response.EmployeeResponse;
-import com.employee.managementsystem.model.Employee;
 import com.employee.managementsystem.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +31,7 @@ public class EmployeeController {
         return this.employeeService.getEmployeeById(id);
     }
     @GetMapping("/search")
-    public @ResponseBody List<Employee> searchEmployeeByDept(@RequestParam String dept){
+    public @ResponseBody List<EmployeeResponse> searchEmployeeByDept(@RequestParam String dept){
         return this.employeeService.searchEmployeeByDept(dept);
     }
 }

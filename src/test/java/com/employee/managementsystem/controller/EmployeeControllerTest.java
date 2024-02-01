@@ -1,9 +1,7 @@
 package com.employee.managementsystem.controller;
 
-import com.employee.managementsystem.model.Employee;
 import com.employee.managementsystem.repository.EmployeeRepository;
 import com.employee.managementsystem.service.EmployeeService;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +17,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EmployeeControllerTest {
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private EmployeeController employeeController;
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -40,6 +40,8 @@ public class EmployeeControllerTest {
                         .get("/employee/" + employeeId)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
     }
 }
+
+
+

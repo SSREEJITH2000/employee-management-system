@@ -10,6 +10,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -35,17 +37,20 @@ public class EmployeeServiceTest {
         EmployeeResponse response = new EmployeeResponse();
         when(modelMapper.map(request, Employee.class)).thenReturn(employee);
         when((employeeRepository.save(any(Employee.class)))).thenReturn(employee);
-        when(modelMapper.map(request, EmployeeResponse.class)).thenReturn(response);
+        when(modelMapper.map(employee, EmployeeResponse.class)).thenReturn(response);
         EmployeeResponse result = employeeService.addEmployee(request);
         assertEquals(result,response);
         verify(employeeRepository,times(1)).save(employee);
     }
     @Test
     void getEmployeeByIdTest(){
+        long id = 1L;
         Employee employee = new Employee();
         EmployeeResponse response = new EmployeeResponse();
+        when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
         when(modelMapper.map(employee, EmployeeResponse.class)).thenReturn(response);
-        assertEquals(employee,response);
-        verify(employeeRepository,times(1)).save(employee);
+        EmployeeResponse result = employeeService.getEmployeeById(id);
+        assertEquals(result,response);
+        verify(employeeRepository,times(1)).findById(id);
     }
 }
