@@ -34,4 +34,8 @@ public class EmployeeController {
     public @ResponseBody List<EmployeeResponse> searchEmployeeByDepartment(@RequestParam String department){
         return this.employeeService.searchEmployeeByDepartment(department);
     }
+    @GetMapping("/department/{department}")
+    public List<EmployeeResponse> getEmployeesByDepartment(@PathVariable String department) {
+        return employeeService.getEmployeesByDepartment(department);
+    }
 }

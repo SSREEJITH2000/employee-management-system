@@ -40,4 +40,11 @@ public class EmployeeService {
         }
         return employeeResponses;
     }
+    public List<EmployeeResponse> getEmployeesByDepartment(String department) {
+        List<Employee> employees = employeeRepository.findByDepartment(department);
+        return employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeResponse.class))
+                .collect(Collectors.toList());
+
+    }
 }

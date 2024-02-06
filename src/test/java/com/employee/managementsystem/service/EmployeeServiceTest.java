@@ -12,11 +12,13 @@ import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -68,5 +70,19 @@ public class EmployeeServiceTest {
                 .collect(Collectors.toList());
         assertEquals(result, retrievedEmployees);
         Mockito.verify(employeeRepository).findAll();
+    }
+    @Test
+    void getEmployeesByDepartment(){
+        when(employeeRepository.findByDepartment(Mockito.any())).thenReturn(new ArrayList<>());
+        Employee employee = Employee.builder()
+                .id(1L)
+                .name("Name")
+                .department("dept")
+                .email("email@gmail.com")
+                .build();
+
+        List<EmployeeResponse> actualEmployeeByDepartment = employeeService.getEmployeesByDepartment("dept");
+        verify(employeeRepository).findByDepartment(Mockito.any());
+        assertTrue(actualEmployeeByDepartment.isEmpty());
     }
 }
