@@ -1,7 +1,9 @@
 package com.employee.managementsystem.controller;
 
+import com.employee.managementsystem.contract.response.EmployeeResponse;
 import com.employee.managementsystem.repository.EmployeeRepository;
 import com.employee.managementsystem.service.EmployeeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,6 +19,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -52,4 +57,18 @@ public class EmployeeControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.content().string("[]"));
     }
+    @Test
+    void testGetEmployeesById() throws Exception {
+        Long id = 1L;
+        EmployeeResponse employeeResponse = new EmployeeResponse(id, "test name", "name@example.com", "test department");
+        when(employeeService.getEmployeeById(id)).thenReturn(employeeResponse);
+
+        mockMvc.perform(get("/employee/" + id))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(employeeResponse)));
+
+
+    }
+
 }
