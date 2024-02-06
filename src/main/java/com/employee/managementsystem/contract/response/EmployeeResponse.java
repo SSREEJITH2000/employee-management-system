@@ -1,6 +1,5 @@
 package com.employee.managementsystem.contract.response;
 
-import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,5 +14,4 @@ public class EmployeeResponse {
     private String name;
     private String email;
     private String department;
-
 }

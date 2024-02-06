@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeRequest {
-    @NotBlank
-    private String name;
-    @Email
-    private String email;
-    @NotBlank
-    private String department;
+    @NotBlank private String name;
+    @Email private String email;
+    @NotBlank private String department;
 }
