@@ -16,16 +16,6 @@ public class ManagementSystemApplication {
     }
 
     @Bean
-    public OpenAPI openAPI() {
-        return new OpenAPI()
-                .info(
-                        new Info()
-                                .title("EmployeeManagementApplication")
-                                .description("Agile Method")
-                                .version("1.0"));
-    }
-
-    @Bean
     public ModelMapper modelMapper() {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration()
