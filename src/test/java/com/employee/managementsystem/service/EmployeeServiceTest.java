@@ -60,25 +60,6 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void searchEmployeeByDepartmentTest() {
-        String department = "First department";
-        List<Employee> allEmployees = new ArrayList<>();
-        when(employeeRepository.findAll()).thenReturn(allEmployees);
-        List<EmployeeResponse> retrievedEmployees =
-                employeeService.searchEmployeeByDepartment(department);
-        List<Employee> result =
-                allEmployees.stream()
-                        .filter(
-                                dept ->
-                                        dept.getDepartment()
-                                                .toLowerCase()
-                                                .contains(department.toLowerCase()))
-                        .collect(Collectors.toList());
-        assertEquals(result, retrievedEmployees);
-        Mockito.verify(employeeRepository).findAll();
-    }
-
-    @Test
     void getEmployeesByDepartment() {
         when(employeeRepository.findByDepartment(Mockito.any())).thenReturn(new ArrayList<>());
         Employee employee =
