@@ -1,7 +1,3 @@
-## README.md:
-
-#### Haven't wrote README.md
-
 
 ## Controller:
 
